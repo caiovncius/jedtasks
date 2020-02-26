@@ -32,5 +32,7 @@ class AppServiceProvider extends ServiceProvider
         // Layout partials
         Blade::component('components.layout.card', 'card');
         Blade::component('components.layout.formfooter', 'formfooter');
+        Blade::component('components.layout.message', 'alert');
+        Blade::component('components.layout.out-logo', 'outlogo');
     }
 }

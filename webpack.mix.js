@@ -11,5 +11,9 @@ const mix = require('laravel-mix');
  |
  */
 
+mix.copyDirectory('node_modules/font-awesome/fonts', 'public/fonts/font-awesome');
+
 mix.js('resources/js/app.js', 'public/js')
    .sass('resources/sass/app.scss', 'public/css');
+
+

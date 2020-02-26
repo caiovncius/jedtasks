@@ -1,6 +1,8 @@
 // Body
 $body-bg: #f8f9fa;
 
+$fa-font-path: "/fonts/font-awesome" !default;
+
 // Typography
 $font-family-sans-serif: 'Montserrat';
 $font-size-base: 0.9rem;
@@ -9,8 +11,9 @@ $line-height-base: 1.6;
 $title-color: rgba(0, 0, 0, 0.5);
 
 // Colors
+$red : #f44946;
 $main-font-color: #6c757d;
-$blue: #3490dc;
+$blue: $red;
 $indigo: #6574cd;
 $purple: #9561e2;
 $pink: #f66d9b;
@@ -20,3 +23,4 @@ $yellow: #ffed4a;
 $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
+
