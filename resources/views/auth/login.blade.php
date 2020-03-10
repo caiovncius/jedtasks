@@ -24,6 +24,12 @@
                     </a>
                 </div>
             @endcard
+            <div class="text-center">
+                Don`t have account?
+                <a class="btn btn-link" href="{{ route('register') }}">
+                    {{ __('Sign up') }}
+                </a>
+            </div>
         </div>
     </div>
 </div>
