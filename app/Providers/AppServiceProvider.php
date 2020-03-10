@@ -25,14 +25,14 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         // Fields
-        Blade::component('components.fields.text', 'field');
-        Blade::component('components.fields.form', 'form');
-        Blade::component('components.fields.submit', 'submit');
+        Blade::aliasComponent('components.fields.text', 'field');
+        Blade::aliasComponent('components.fields.form', 'form');
+        Blade::aliasComponent('components.fields.submit', 'submit');
 
         // Layout partials
-        Blade::component('components.layout.card', 'card');
-        Blade::component('components.layout.formfooter', 'formfooter');
-        Blade::component('components.layout.message', 'alert');
-        Blade::component('components.layout.out-logo', 'outlogo');
+        Blade::aliasComponent('components.layout.card', 'card');
+        Blade::aliasComponent('components.layout.formfooter', 'formfooter');
+        Blade::aliasComponent('components.layout.message', 'alert');
+        Blade::aliasComponent('components.layout.out-logo', 'outlogo');
     }
 }
