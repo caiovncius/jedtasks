@@ -26,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
     {
         // Fields
         Blade::aliasComponent('components.fields.text', 'field');
+        Blade::aliasComponent('components.fields.textarea', 'textarea');
         Blade::aliasComponent('components.fields.form', 'form');
         Blade::aliasComponent('components.fields.submit', 'submit');
 
@@ -34,5 +35,6 @@ class AppServiceProvider extends ServiceProvider
         Blade::aliasComponent('components.layout.formfooter', 'formfooter');
         Blade::aliasComponent('components.layout.message', 'alert');
         Blade::aliasComponent('components.layout.out-logo', 'outlogo');
+        Blade::aliasComponent('components.layout.tabs', 'tabs');
     }
 }

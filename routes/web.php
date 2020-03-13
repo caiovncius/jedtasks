@@ -22,3 +22,15 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+/**********************************************************
+ * Account routes
+ *********************************************************/
+Route::prefix('account')->group(function() {
+
+    Route::get('/', 'AccountController@edit')->name('account.edit');
+    Route::put('/update-profile', 'AccountController@updateProfile')->name('account.update.profile');
+    Route::put('/update-workspace', 'AccountController@updateWorkspace')->name('account.update.workspace');
+    Route::put('/update-settings', 'AccountController@updateSettings')->name('account.update.settings');
+    Route::put('/update-password', 'AccountController@updatePassword')->name('account.update.password');
+});

@@ -1,0 +1,17 @@
+.j-tabs {
+    nav {
+        a {
+
+            &.nav-link {
+                color: $dark-grey;
+                border-radius: 0;
+
+                &.active, {
+                    color: $red;
+                    background-color: $white;
+                    border-bottom: 2px solid $red;
+                }
+            }
+        }
+    }
+}
