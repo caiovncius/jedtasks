@@ -2,26 +2,46 @@
 
 namespace App;
 
+use App\Traits\Boot\UserBoot;
+use App\Traits\Relations\UserRelations;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+/**
+ * Class User
+ * @package App
+ *
+ * @property string $password
+ */
+class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable;
+    use Notifiable, UserBoot, UserRelations;
 
     /**
-     * The attributes that are mass assignable.
-     *
+     * User workspaces roles
+     */
+    const ROLE_OWNER = 'OWNER';
+    const ROLE_ADMIN = 'ADMIn';
+    const ROLE_USER = 'USER';
+
+    /**
+     * User workspaces invite status
+     */
+    const INVITE_NEW = 'NEW';
+    const INVITE_ACCEPTED = 'ACCEPTED';
+    const INVITE_SELF = 'SELF';
+    const INVITE_REJECTED = 'REJECTED';
+
+
+    /**
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'public_id'
     ];
 
     /**
-     * The attributes that should be hidden for arrays.
-     *
      * @var array
      */
     protected $hidden = [
@@ -29,11 +49,16 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be cast to native types.
-     *
      * @var array
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+    ];
+
+    /**
+     * @var array
+     */
+    protected $guarded = [
+        'public_id'
     ];
 }

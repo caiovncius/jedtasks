@@ -16,7 +16,7 @@ class CreateWorkspacesTable extends Migration
         Schema::create('workspaces', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->uuid('public_id');
-            $table->string('name')->unique();
+            $table->string('name');
             $table->enum('status', ['ACTIVE', 'BLOCKED', 'SUSPEND'])->default('ACTIVE');
             $table->timestamps();
         });
