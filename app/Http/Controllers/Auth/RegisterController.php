@@ -2,15 +2,25 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Account\Contracts\AccountCreatable;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AccountCreatorRequest;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
+
+    /**
+     * @var AccountCreatable
+     */
+    private $registerService;
+
     /*
     |--------------------------------------------------------------------------
     | Register Controller
@@ -32,42 +42,40 @@ class RegisterController extends Controller
     protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * RegisterController constructor.
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function __construct()
     {
         $this->middleware('guest');
+        $this->registerService = app()->make(AccountCreatable::class);
     }
 
     /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @param AccountCreatorRequest $request
+     * @return \Illuminate\Http\RedirectResponse|Response|\Illuminate\Routing\Redirector|mixed
      */
-    protected function validator(array $data)
+    public function register(AccountCreatorRequest $request)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-    }
+        try {
+            $user = $this->registerService->register(
+                $request->name,
+                $request->email,
+                $request->password,
+                $request->workspace_name
+            );
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+            $this->guard()->login($user);
+
+            if ($response = $this->registered($request, $user)) {
+                return $response;
+            }
+
+            return $request->wantsJson()
+                ? new Response('', 201)
+                : redirect($this->redirectPath());
+        } catch (\Exception $e) {
+            abort($e->getCode());
+        }
     }
 }

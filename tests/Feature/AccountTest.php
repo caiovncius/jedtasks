@@ -36,6 +36,8 @@ class AccountTest extends TestCase
         $this->assertTrue(Str::isUuid($account->public_id));
         $this->assertTrue(Str::isUuid($account->workspaces()->first()->public_id));
         $this->assertNull($account->email_verified_at);
+        $this->assertTrue($account->workspaces()->first()->pivot->role === \App\User::ROLE_OWNER);
+        $this->assertTrue($account->workspaces()->first()->pivot->invite_status === \App\User::INVITE_SELF);
 
     }
 }
