@@ -9,11 +9,15 @@
                 @card()
                     <div class="text-center pt-4 pb-4">
                         <img
+                            id="jt-account-user-avatar"
                             src="{{ asset('img/darth-icon.svg') }}"
                             alt="{{ auth()->user()->name }} {{ __('avatar') }}"
                             class="rounded-circle j-avatar j-profile shadow-sm"
                         />
-                        <h2 class="mt-4">{{ auth()->user()->name }}</h2>
+                        <br>
+                        <a href="javascript:void(0);" id="jt-trigger-avatar" class="btn btn-light mt-3">{{ __('Update photo') }}</a>
+                        <h2 class="mt-4" id="jt-account-user-name">{{ auth()->user()->name }}</h2>
+                        <h5 id="jt-account-workspace-name">{{ auth()->user()->workspace->name }}</h5>
                     </div>
                     @tabs()
                         @component('components.account.tab-list')
@@ -29,3 +33,7 @@
         </section>
     </main>
 @endsection
+
+@push('scripts')
+    <script src="/scripts/account.js"></script>
+@endpush

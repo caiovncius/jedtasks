@@ -6,6 +6,10 @@
 
 require('./bootstrap');
 
+
+require('./scripts/helpers');
+require('./scripts/account');
+
 window.Vue = require('vue');
 
 /**

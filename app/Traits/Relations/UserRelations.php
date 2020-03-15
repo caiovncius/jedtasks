@@ -13,7 +13,7 @@ trait UserRelations
      */
     public function workspaces()
     {
-        return $this->belongsToMany(Workspace::class, 'user_workspaces', 'user_id', 'workspace_id')
+        return $this->belongsToMany(Workspace::class, 'user_workspaces', 'user_id')
             ->withPivot(['role', 'invite_owner', 'invite_status']);
     }
 }

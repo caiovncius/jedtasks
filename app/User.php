@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\Acessors\UserAcessors;
 use App\Traits\Boot\UserBoot;
 use App\Traits\Relations\UserRelations;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -16,7 +17,7 @@ use Illuminate\Notifications\Notifiable;
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable, UserBoot, UserRelations;
+    use Notifiable, UserBoot, UserRelations, UserAcessors;
 
     /**
      * User workspaces roles

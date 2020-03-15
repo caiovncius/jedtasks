@@ -26,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
     {
         // Fields
         Blade::aliasComponent('components.fields.text', 'field');
+        Blade::aliasComponent('components.fields.file', 'file');
         Blade::aliasComponent('components.fields.textarea', 'textarea');
         Blade::aliasComponent('components.fields.form', 'form');
         Blade::aliasComponent('components.fields.submit', 'submit');

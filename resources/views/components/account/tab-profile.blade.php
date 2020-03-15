@@ -2,6 +2,13 @@
     <div class="mt-4">
         @form(['route' => route('account.update.profile'), 'method' => 'PUT'])
 
+            <div class="d-none">
+                @file([
+                    'name' => 'avatar',
+                    'label' => false,
+                ])
+                @endfile
+            </div>
             @field([
                 'name' => 'name',
                 'label' => trans('Name'),
