@@ -40,7 +40,7 @@ class AccountController extends Controller
     {
         try {
             $this->profileService->update($request->all(), $request->file('avatar'));
-            return back()->withStatus(__('Profile updated successfuly!'));
+            return back()->withStatus(__('Profile updated successfully!'));
         } catch (\Exception $e) {
             return back()->withErrors( __('Some error has occurred. Please, try again later.'));
         }
