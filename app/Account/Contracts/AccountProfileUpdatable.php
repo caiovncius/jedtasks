@@ -3,15 +3,17 @@
 
 namespace App\Account\Contracts;
 
+use App\User;
 use Illuminate\Http\UploadedFile;
 
 interface AccountProfileUpdatable
 {
     /**
+     * @param User $user
      * @param array $newData
      * @param UploadedFile|null $file
-     * @return \Illuminate\Contracts\Auth\Authenticatable|null
+     * @return User|\Illuminate\Contracts\Auth\Authenticatable|null
      * @throws \Exception
      */
-    public function update(array $newData, UploadedFile $file = null);
+    public function update(User $user, array $newData, UploadedFile $file = null);
 }

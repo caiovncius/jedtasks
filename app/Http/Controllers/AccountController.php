@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Account\Contracts\AccountProfileUpdatable;
 use App\Http\Requests\AccountProfileRequest;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AccountController extends Controller
 {
@@ -39,7 +41,7 @@ class AccountController extends Controller
     public function updateProfile(AccountProfileRequest $request)
     {
         try {
-            $this->profileService->update($request->all(), $request->file('avatar'));
+            $this->profileService->update(User::find(Auth::id()), $request->all(), $request->file('avatar'));
             return back()->withStatus(__('Profile updated successfully!'));
         } catch (\Exception $e) {
             return back()->withErrors( __('Some error has occurred. Please, try again later.'));
