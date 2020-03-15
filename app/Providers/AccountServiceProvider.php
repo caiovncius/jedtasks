@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Account\Contracts\AccountCreatable;
+use App\Account\Contracts\AccountProfileUpdatable;
 use App\Account\Services\AccountCreator;
+use App\Account\Services\AccountProfileUpdator;
 use Illuminate\Support\ServiceProvider;
 
 class AccountServiceProvider extends ServiceProvider
@@ -26,5 +28,6 @@ class AccountServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->app->bind(AccountCreatable::class, AccountCreator::class);
+        $this->app->bind(AccountProfileUpdatable::class, AccountProfileUpdator::class);
     }
 }

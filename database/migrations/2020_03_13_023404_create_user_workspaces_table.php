@@ -17,10 +17,15 @@ class CreateUserWorkspacesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('workspace_id');
-            $table->unsignedBigInteger('invite_owner')->nullable();
+            $table->bigInteger('invite_owner')->nullable();
             $table->enum('invite_status', ['NEW', 'ACCEPTED', 'REJECTED', 'SELF'])->default('NEW');
             $table->enum('role', ['OWNER', 'ADMIN', 'USER'])->default('USER');
+            $table->string('position')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
+
+            $table->foreign('workspace_id')->references('id')->on('workspaces');
         });
     }
 

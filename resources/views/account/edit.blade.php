@@ -10,7 +10,7 @@
                     <div class="text-center pt-4 pb-4">
                         <img
                             id="jt-account-user-avatar"
-                            src="{{ asset('img/darth-icon.svg') }}"
+                            src="{{ is_null(auth()->user()->avatar) ?  asset('img/darth-icon.svg') : \Illuminate\Support\Facades\Storage::url(auth()->user()->avatar) }}"
                             alt="{{ auth()->user()->name }} {{ __('avatar') }}"
                             class="rounded-circle j-avatar j-profile shadow-sm"
                         />

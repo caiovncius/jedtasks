@@ -59413,6 +59413,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./scripts/helpers */ "./resources/js/scripts/helpers.js");
 
+__webpack_require__(/*! ./scripts/submit */ "./resources/js/scripts/submit.js");
+
 __webpack_require__(/*! ./scripts/account */ "./resources/js/scripts/account.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
@@ -59598,6 +59600,22 @@ window.helpers = {
     }
   }
 };
+
+/***/ }),
+
+/***/ "./resources/js/scripts/submit.js":
+/*!****************************************!*\
+  !*** ./resources/js/scripts/submit.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+  $('form').submit(function () {
+    var width = $(this).find(':submit').width();
+    $(this).find(':submit').html('<i class="fa fa-circle-o-notch fa-spin"></i>').width(width);
+  });
+});
 
 /***/ }),
 
