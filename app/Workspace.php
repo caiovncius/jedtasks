@@ -3,17 +3,18 @@
 namespace App;
 
 use App\Traits\Boot\WorkspaceBoot;
+use App\Traits\Relations\WorkspaceRelations;
 use Illuminate\Database\Eloquent\Model;
 
 class Workspace extends Model
 {
-    use WorkspaceBoot;
+    use WorkspaceBoot, WorkspaceRelations;
 
     /**
      * @var array
      */
     protected $fillable = [
-        'name', 'public_id', 'status'
+        'name', 'public_id', 'status', 'short_name'
     ];
 
     /**

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateWorkspacesTable extends Migration
+class CreateSettingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateWorkspacesTable extends Migration
      */
     public function up()
     {
-        Schema::create('workspaces', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->uuid('public_id');
-            $table->string('name');
-            $table->string('short_name');
-            $table->enum('status', ['ACTIVE', 'BLOCKED', 'SUSPEND'])->default('ACTIVE');
+        Schema::create('settings', function (Blueprint $table) {
+            $table->id();
+            $table->string('settingable_type');
+            $table->bigInteger('settingable_id');
+            $table->string('key');
+            $table->longText('value')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateWorkspacesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('workspaces');
+        Schema::dropIfExists('settings');
     }
 }

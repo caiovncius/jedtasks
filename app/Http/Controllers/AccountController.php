@@ -6,6 +6,7 @@ use App\Account\Contracts\AccountPasswordUpdatable;
 use App\Account\Contracts\AccountProfileUpdatable;
 use App\Http\Requests\AccountPasswordResetRequest;
 use App\Http\Requests\AccountProfileRequest;
+use App\Http\Requests\AccountWorkspaceRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -75,7 +76,7 @@ class AccountController extends Controller
         }
     }
 
-    public function updateWorkspace()
+    public function updateWorkspace(AccountWorkspaceRequest $request)
     {
 
     }

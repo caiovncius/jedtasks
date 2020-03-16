@@ -44,6 +44,9 @@ class AccountCreator implements AccountCreatable
                 ]
             );
 
+            $settingsSeeder = new \DefaultUserSettings($user);
+            $settingsSeeder->run();
+
             event( new Registered($user));
 
             return $user;
