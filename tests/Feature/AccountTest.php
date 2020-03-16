@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Account\Contracts\AccountCreatable;
+use App\Account\Contracts\AccountPasswordUpdatable;
 use App\Account\Contracts\AccountProfileUpdatable;
 use Faker\Factory;
 use Illuminate\Auth\Events\Registered;
@@ -10,6 +11,7 @@ use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
@@ -69,5 +71,21 @@ class AccountTest extends TestCase
         $this->assertEquals($data['email'], $updatedUser->email);
         $this->assertEquals($data['bio'], $updatedUser->bio);
         $this->assertNotNull($updatedUser->avatar);
+    }
+
+    /**
+     * Test user update password
+     *
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    public function testPasswordReset()
+    {
+        Notification::fake();
+        $service = app()->make(AccountPasswordUpdatable::class);
+        $user = \factory(\App\User::class)->make(['password' => Hash::make('111111')]);
+        $result = $service->updatePassword($user, '111111', '123456');
+        $this->assertInstanceOf(\App\User::class, $result);
+        $this->assertNotInstanceOf(\Exception::class, $result);
+
     }
 }
