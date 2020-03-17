@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Account\Contracts\AccountCreatable;
 use App\Account\Contracts\AccountPasswordUpdatable;
 use App\Account\Contracts\AccountProfileUpdatable;
+use App\Account\Contracts\AccountWorkspaceUpdatable;
 use Faker\Factory;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -87,5 +88,23 @@ class AccountTest extends TestCase
         $this->assertInstanceOf(\App\User::class, $result);
         $this->assertNotInstanceOf(\Exception::class, $result);
 
+    }
+
+    /**
+     * Test Workspace update
+     *
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    public function testUpdateWorkspace()
+    {
+        $service = app()->make(AccountWorkspaceUpdatable::class);
+        $faker = Factory::create();
+        $workspace = \factory(\App\Workspace::class)->create();
+
+        $newName = $faker->company;
+        $result = $service->update($workspace, ['name' => $newName]);
+
+        $this->assertEquals($newName, $result->name);
+        $this->assertNotInstanceOf(\Exception::class, $result);
     }
 }

@@ -21,5 +21,10 @@ trait WorkspaceBoot
             $workspace->short_name = WorkspaceShortName::generate($workspace->name);
             return $workspace;
         });
+
+        static::updating(function (Workspace $workspace) {
+            $workspace->short_name = WorkspaceShortName::generate($workspace->name);
+            return $workspace;
+        });
     }
 }

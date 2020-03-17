@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Account\Contracts\AccountPasswordUpdatable;
 use App\Account\Contracts\AccountProfileUpdatable;
+use App\Account\Contracts\AccountWorkspaceUpdatable;
 use App\Http\Requests\AccountPasswordResetRequest;
 use App\Http\Requests\AccountProfileRequest;
 use App\Http\Requests\AccountWorkspaceRequest;
@@ -24,6 +25,11 @@ class AccountController extends Controller
     private $passwordService;
 
     /**
+     * @var AccountWorkspaceUpdatable
+     */
+    private $workspaceService;
+
+    /**
      * AccountController constructor.
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
@@ -33,6 +39,7 @@ class AccountController extends Controller
 
         $this->profileService = app()->make(AccountProfileUpdatable::class);
         $this->passwordService = app()->make(AccountPasswordUpdatable::class);
+        $this->workspaceService = app()->make(AccountWorkspaceUpdatable::class);
     }
 
     /**
@@ -76,9 +83,18 @@ class AccountController extends Controller
         }
     }
 
+    /**
+     * @param AccountWorkspaceRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function updateWorkspace(AccountWorkspaceRequest $request)
     {
-
+        try {
+            $this->workspaceService->update(Auth::user()->workspace, $request->all());
+            return back()->withStatus(__('Workspace updated successfully!'));
+        } catch (\Exception $e) {
+            return back()->withErrors($e->getMessage());
+        }
     }
 
     public function updateSettings()
