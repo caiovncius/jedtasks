@@ -47,7 +47,10 @@ class AccountController extends Controller
      */
     public function edit()
     {
-        return view('account.edit');
+        $languages = config('languages');
+        $timezones = config('timezones');
+
+        return view('account.edit', compact('languages', 'timezones'));
     }
 
     /**
